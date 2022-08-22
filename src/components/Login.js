@@ -1,18 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { generateKeyPair } from 'crypto'
-import jwt from 'jsonwebtoken'
-
 const Login = () => {
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
 
     const handleClick = () => {
-        fetch(`http://localhost:5000/user/${ credential }`, {
+        fetch(`http://localhost:5000/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: { credential, password }
+            body: JSON.stringify({ credential, password })
         })
             .then((res) => res.text())
             .then((data) => {
@@ -21,8 +18,8 @@ const Login = () => {
                     alert(error);
                     return;
                 } else {
-                    // Generate jwt
-                    console.log('You are logged in');
+                    const { accessToken } = JSON.parse(data);
+                    localStorage.setItem('accessToken', accessToken);
                 }
             });
     };
