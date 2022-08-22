@@ -22,6 +22,7 @@ const Signup = () => {
         })
             .then(res => res.text())
             .then((data) => {
+                /* eslint-disable */
                 const error = JSON.parse(data).err;
                 if (error) {
                     let message = '';
