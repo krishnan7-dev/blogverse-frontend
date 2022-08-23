@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleClick = () => {
         fetch(`http://localhost:5000/login`, {
@@ -20,6 +22,7 @@ const Login = () => {
                 } else {
                     const { accessToken } = JSON.parse(data);
                     localStorage.setItem('accessToken', accessToken);
+                    navigate('/blogs');
                 }
             });
     };
