@@ -22,22 +22,24 @@ const Signup = () => {
         })
             .then(res => res.text())
             .then((data) => {
-                /* eslint-disable */
                 const error = JSON.parse(data).err;
                 if (error) {
                     let message = '';
                     switch (error) {
                         case 'Invalid Username':
-                            message = '';
+                            message = 'The username is invalid. The username should contain atleast 5 characters. The allowed characters are alphabets, digits, "_" and "-".';
                             break;
                         
                         case 'Invalid Email':
-                            message = '';
+                            message = 'The email is invalid.';
                             break;
 
                         case 'Invalid Password':
-                            message = '';
+                            message = 'The password is invalid. The password should contains atleast 8 characters. The allowed characters are alphabets, digits, "_", "-", "@", "$"';
                             break;
+                        
+                        default:
+                            message = 'Error creating user. Please try again.'
                     }
                     alert(message);
                     return;
