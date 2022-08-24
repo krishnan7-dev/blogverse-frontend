@@ -17,7 +17,8 @@ const Create = () => {
         })
             .then((res) => res.text())
             .then((data) => {
-                console.log(data);
+                setTitle('');
+                setContent('');
             })
             .catch(err => console.log(err));
     };
