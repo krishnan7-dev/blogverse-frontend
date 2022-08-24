@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
 import Profile from './components/Profile';
+import Create from './components/Create';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
             <Route exact path="/login" element={ <Login/> }></Route>
             <Route exact path="/signup" element={ <Signup/> }></Route>
             <Route path='/profile' element={ <Profile/> }></Route>
+            <Route exact path='/create' element={ <Create/> }></Route>
+            <Route exact path='/logout' element={ <Login/> }></Route>
           </Routes>
           <Footer/>
         </Router>
