@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useJwt } from "react-jwt";
 import jwt_decode from 'jwt-decode';
 
 const Profile = () => {
+    const [id, setId] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -10,7 +10,9 @@ const Profile = () => {
     const accessToken = localStorage.getItem('accessToken');
     const decodedToken = jwt_decode(accessToken);
 
+    /* eslint-disable */
     useEffect(() => {
+        setId(decodedToken.id);
         setUsername(decodedToken.username);
         setEmail(decodedToken.email);
         setPassword(decodedToken.password);
@@ -19,6 +21,21 @@ const Profile = () => {
     const togglePasswordVisibility = () => {
         const passwordField = document.querySelectorAll('.form-container form input')[2];
         passwordField.type = (passwordField.type === 'password') ? 'text' : 'password';
+    };
+
+    const updateProfile = () => {
+        fetch(`http://localhost:5000/user/${ id }`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password })
+        })
+            .then(res => res.text())
+            .then(data => {
+                // Check for errors here
+                const { accessToken } = JSON.parse(data);
+                localStorage.setItem('accessToken', accessToken);
+                alert('Your profile has been updated');
+            });
     };
 
     return (
@@ -31,7 +48,7 @@ const Profile = () => {
                     <input className="text-center" type="password" value={ password } onChange={ e => setPassword(e.target.value) } placeholder="Password"/>
                 </form>
                 <button onClick={ togglePasswordVisibility }>See Password</button>
-                <button>Update Profile</button>
+                <button onClick={ updateProfile }>Update Profile</button>
             </div>
         </div>
     );
