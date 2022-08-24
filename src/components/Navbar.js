@@ -1,6 +1,7 @@
 import Logo from '../images/logo.svg';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavLink from "./NavLink";
+import { useEffect } from 'react';
 
 const { useJwt } = require('react-jwt');
 
@@ -8,9 +9,20 @@ const Navbar = () => {
     const accessToken = localStorage.getItem('accessToken');
     const { decodedToken, isExpired } = useJwt(accessToken);
 
-    console.log(decodedToken);
-    console.log(isExpired);
-    (decodedToken && !isExpired) ? console.log('Logged in') : console.log('Not logged in');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (decodedToken && !isExpired) {
+            if (window.location.pathname === '/login') {
+                navigate('/blogs');
+            }
+        }
+
+        if (window.location.pathname === '/logout') {
+            localStorage.removeItem('accessToken');
+            navigate('/login');
+        }
+    })
 
     return (
         <nav id="navbar">
@@ -20,11 +32,12 @@ const Navbar = () => {
                 </div>
             </Link>
             <div className="links">
-                { (decodedToken && !isExpired) ? (
+                { (decodedToken && !isExpired && !(window.location.pathname === '/signup') && !(window.location.pathname === '/')) ? (
                     <ul>
                         <Link to="/create"><NavLink text="Create" /></Link>
                         <Link to="/blogs"><NavLink text="Blogs" /></Link>
                         <Link to="/profile"><NavLink text="Your Profile" /></Link>
+                        <Link to="/logout"><NavLink text="Logout" /></Link>
                     </ul>
                 ) : (
                     <ul>
