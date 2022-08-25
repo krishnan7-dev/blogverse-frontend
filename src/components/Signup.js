@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { userUrl } from "../apiurls";
+
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -15,7 +17,7 @@ const Signup = () => {
             return;
         }
 
-        fetch('http://localhost:5000/user', {
+        fetch(userUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })

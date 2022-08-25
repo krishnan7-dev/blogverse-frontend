@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { loginUrl } from "../apiurls";
+
 const Login = () => {
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
@@ -8,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        fetch(`http://localhost:5000/login`, {
+        fetch(loginUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ credential, password })

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import jwt_decode from 'jwt-decode';
 
+import { userUrl } from "../apiurls";
+
 const Profile = () => {
     const [id, setId] = useState('');
     const [username, setUsername] = useState('');
@@ -24,7 +26,7 @@ const Profile = () => {
     };
 
     const updateProfile = () => {
-        fetch(`http://localhost:5000/user/${ id }`, {
+        fetch(`${userUrl}/${ id }`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })
