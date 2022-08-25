@@ -318,6 +318,16 @@ a {
   color: var(--orange);
 }
 
+/* Blogs style */
+
+.blogs-container {
+  width: 100%;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Footer styles */
 
 #footer {
