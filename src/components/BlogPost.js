@@ -20,10 +20,14 @@ const BlogPost = () => {
     }, [id]);
 
     return (
-        <div>
-            <h1>{ title }</h1>
-            <h2>Written by: { author }</h2>
-            <p>{ content }</p>
+        <div className="blog-wrapper">
+            <div className="blog-post-container">
+                <div className="blog-title">
+                    <h1>{ title }</h1>
+                    <h2>Written by: { author }</h2>
+                </div>
+                <p className="blog-content">{ content }</p>
+            </div>
         </div>
     );
 }
