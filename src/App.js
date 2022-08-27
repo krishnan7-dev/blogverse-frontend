@@ -9,6 +9,7 @@ import Signup from './components/Signup';
 import Footer from './components/Footer';
 import Profile from './components/Profile';
 import Create from './components/Create';
+import BlogPost from './components/BlogPost';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={ <Home/> }></Route>
             <Route exact path="/blogs" element={ <Blogs/> }></Route>
+            <Route exact path="/blogs/:id" element={ <BlogPost/> }></Route>
             <Route exact path="/login" element={ <Login/> }></Route>
             <Route exact path="/signup" element={ <Signup/> }></Route>
             <Route path='/profile' element={ <Profile/> }></Route>
