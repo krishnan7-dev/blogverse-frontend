@@ -15,7 +15,7 @@ const Blogs = () => {
 
     return (
         <div className="blogs-container">
-            {blogs.map(blog =>  <Blog title={ blog.title } author={ blog.author }/>)}
+            {blogs.map(blog =>  <Blog key={ blog.id } id={ blog.id } title={ blog.title } author={ blog.author }/>)}
         </div>
     );
 }
