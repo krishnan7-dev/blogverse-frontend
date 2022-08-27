@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const Blog = ({ title, author }) => {
+const Blog = ({ id, title, author }) => {
     return (
-        <div>
-            <Link to='/blogs'><h1>{ title }</h1></Link>
+        <div className='blog-link'>
+            <Link to={ `/blogs/${ id }` }><h1>{ title }</h1></Link>
             <h2>{ author }</h2>
         </div>
     );
